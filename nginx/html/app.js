@@ -8,8 +8,13 @@ async function updateViews(method) {
 const message = document.querySelector('#message');
 // 페이지 로드당 한 번만 증가. 다시 확인 버튼은 GET이므로 증가하지 않습니다.
 updateViews('POST').catch(error => { message.textContent = error.message; });
-document.querySelector('#refresh-views').addEventListener('click', () => {
-  updateViews('GET').catch(error => { message.textContent = error.message; });
+document.querySelector('#refresh-views').addEventListener('click', async () => {
+  try {
+    await updateViews('GET');
+    message.textContent = '현재 조회수를 다시 확인했습니다.';
+  } catch (error) {
+    message.textContent = error.message;
+  }
 });
 document.querySelector('#download-button').addEventListener('click', async event => {
   const button = event.currentTarget; button.disabled = true;

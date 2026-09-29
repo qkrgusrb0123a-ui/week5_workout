@@ -2,19 +2,19 @@
 name: week5hw
 services:
   api:
-    build: TODO_API_DIRECTORY
+    build: ./api
     image: week5_03
     container_name: week5_api02
     environment:
-      DATA_DIR: TODO_DATA_DIRECTORY
+      DATA_DIR: /data
     volumes:
-      - TODO_VOLUME:/data
+      - data:/data
   nginx:
-    build: TODO_WEB_DIRECTORY
+    build: ./nginx
     image: week5_04
     container_name: week5_web02
     ports:
-      - "TODO_HOST_PORT:80"
+      - "8080:80"
     depends_on:
       - api
 networks:
